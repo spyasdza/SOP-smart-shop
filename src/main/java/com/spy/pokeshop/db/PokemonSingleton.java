@@ -59,10 +59,10 @@ public class PokemonSingleton {
             fo.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            e.printStackTrace();
         }
         catch (IOException e) {
-            System.out.println("Error initializing stream");
+            e.printStackTrace();
         }
     }
 
@@ -83,9 +83,10 @@ public class PokemonSingleton {
             fo.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found");
-        } catch (IOException e) {
-            System.out.println("Error initializing stream");
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -100,10 +101,10 @@ public class PokemonSingleton {
             fi.close();
         }
         catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            e.printStackTrace();
         }
         catch (IOException e) {
-            System.out.println("Error initializing stream");
+            e.printStackTrace();
         }
         catch (ClassNotFoundException e) {
             e.printStackTrace();
