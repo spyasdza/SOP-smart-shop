@@ -74,6 +74,7 @@ public class PokemonSingleton {
             for (int i=0; i<pokemonData.size();i++) {
                 if (pokemonData.get(i).getUuid().equals(uuid)){
                     pokemonData.remove(i);
+                    break;
                 }
             }
             oo.writeObject(pokemonData);
