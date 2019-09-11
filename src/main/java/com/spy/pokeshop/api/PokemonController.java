@@ -16,8 +16,8 @@ public class PokemonController {
     @GetMapping("/")
     String home() {
         return "Welcome to <b>Pokemon Shop!</b><br/><br/>" +
-                "To see all Pokemon <b>'/show'</b><br/>" +
-                "To add a Pokemon <b>'/add'</b><br/>" +
+                "To see all Pokemon: <b>'/show'</b><br/>" +
+                "To add a Pokemon: <b>'/add'</b><br/>" +
                 "To see Pokemon by id: <b>'/show/uuid={uuid}'</b><br/>" +
                 "To see Pokemon by name: <b>'/show/name={name}'</b><br/>" +
                 "To buy a Pokemon: <b>'/{uuid}'</b><br/>";
