@@ -20,7 +20,7 @@ public class PokemonController {
                 "To add a Pokemon <b>'/add'</b><br/>" +
                 "To see Pokemon by id: <b>'/show/uuid={uuid}'</b><br/>" +
                 "To see Pokemon by name: <b>'/show/name={name}'</b><br/>" +
-                "To buy a Pokemon: <b>'/buy/{uuid}'</b><br/>";
+                "To buy a Pokemon: <b>'/{uuid}'</b><br/>";
     }
 
     @PostMapping(path = "add")

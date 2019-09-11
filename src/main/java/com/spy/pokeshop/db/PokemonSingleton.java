@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 public class PokemonSingleton {
     private static PokemonSingleton INSTANCE;
