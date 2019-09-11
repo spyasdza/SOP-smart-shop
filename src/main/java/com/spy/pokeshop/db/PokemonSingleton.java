@@ -10,11 +10,12 @@ import java.util.UUID;
 public class PokemonSingleton {
     private static PokemonSingleton INSTANCE;
     private LinkedList<Pokemon> pokemonData = new LinkedList<>();
+
     private PokemonSingleton() {
     }
 
     public static PokemonSingleton getInstance() {
-        if(INSTANCE == null) {
+        if (INSTANCE == null) {
             INSTANCE = new PokemonSingleton();
         }
 
@@ -22,15 +23,41 @@ public class PokemonSingleton {
     }
 
     public LinkedList<Pokemon> showAllPokemon() {
-        readFile();
+        try {
+            FileInputStream fi = new FileInputStream(new File("AllPokemonData.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            pokemonData = (LinkedList<Pokemon>) oi.readObject();
+            oi.close();
+            fi.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return pokemonData;
     }
 
     public LinkedList<Pokemon> showPokemonByName(String name) {
         LinkedList<Pokemon> pokemonByName = new LinkedList<>();
-        readFile();
-        for (int i=0; i<pokemonData.size();i++) {
-            if (pokemonData.get(i).getName().equals(name)){
+        try {
+            FileInputStream fi = new FileInputStream(new File("AllPokemonData.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            pokemonData = (LinkedList<Pokemon>) oi.readObject();
+            oi.close();
+            fi.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < pokemonData.size(); i++) {
+            if (pokemonData.get(i).getName().equals(name)) {
                 pokemonByName.add(pokemonData.get(i));
             }
         }
@@ -38,40 +65,49 @@ public class PokemonSingleton {
     }
 
     public Optional<Pokemon> showPokemonByUuid(UUID uuid) {
-        readFile();
+        try {
+            FileInputStream fi = new FileInputStream(new File("AllPokemonData.txt"));
+            ObjectInputStream oi = new ObjectInputStream(fi);
+
+            pokemonData = (LinkedList<Pokemon>) oi.readObject();
+            oi.close();
+            fi.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         return pokemonData.stream().filter(pokemon -> pokemon.getUuid().equals(uuid)).findFirst();
     }
 
 
-
-    public void addPokemon(Pokemon pokemon){
+    public void addPokemon(Pokemon pokemon) {
         UUID uuid = UUID.randomUUID();
         pokemon.setUuid(uuid);
-        try{
+        try {
             FileOutputStream fo = new FileOutputStream(new File("AllPokemonData.txt"));
             ObjectOutputStream oo = new ObjectOutputStream(fo);
             pokemonData.add(pokemon);
 
             oo.writeObject(pokemonData);
-
             oo.close();
             fo.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void buyPokemonById(UUID uuid){
-        try{
+    public void buyPokemonById(UUID uuid) {
+        try {
             FileOutputStream fo = new FileOutputStream(new File("AllPokemonData.txt"));
             ObjectOutputStream oo = new ObjectOutputStream(fo);
 
-            for (int i=0; i<pokemonData.size();i++) {
-                if (pokemonData.get(i).getUuid().equals(uuid)){
+            for (int i = 0; i < pokemonData.size(); i++) {
+                if (pokemonData.get(i).getUuid().equals(uuid)) {
                     pokemonData.remove(i);
                     break;
                 }
@@ -80,32 +116,9 @@ public class PokemonSingleton {
 
             oo.close();
             fo.close();
-        }
-        catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readFile() {
-        try{
-            FileInputStream fi = new FileInputStream(new File("AllPokemonData.txt"));
-            ObjectInputStream oi = new ObjectInputStream(fi);
-
-            pokemonData = (LinkedList<Pokemon>) oi.readObject();
-
-            oi.close();
-            fi.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        catch (ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
